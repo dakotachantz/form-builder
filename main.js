@@ -98,4 +98,14 @@ let formData = [
 
 // -------- Your Code Goes Below this Line --------
 
+let fieldsContent = document.getElementById("fields");
+for (let i = 0; i < formData.length; i++) {
+  let input = document.createElement("input");
+  input.placeholder = formData[i].label;
 
+  for (let property in formData[i]) {
+    let value = formData[i][property];
+    input.setAttribute(property, value);
+  }
+  fieldsContent.appendChild(input);
+}
