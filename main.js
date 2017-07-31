@@ -101,11 +101,39 @@ let formData = [
 let fieldsContent = document.getElementById("fields");
 for (let i = 0; i < formData.length; i++) {
   let input = document.createElement("input");
-  input.placeholder = formData[i].label;
+  let select = document.createElement("select");
+  let textArea = document.createElement("textarea");
 
   for (let property in formData[i]) {
-    let value = formData[i][property];
-    input.setAttribute(property, value);
+    if (formData[i].type === "text" || formData[i].type === "tel" || formData[i].type === "email") {
+      let value = formData[i][property];
+
+      input.placeholder = formData[i].label;
+      input.setAttribute(property, value);
+      fieldsContent.appendChild(input);
+    }
+    else if (formData[i].type === "textarea") {
+      let value = formData[i][property];
+
+      textArea.placeholder = formData[i].label;
+      textArea.setAttribute(property, value);
+      fieldsContent.appendChild(textArea);
+    }
   }
-  fieldsContent.appendChild(input);
+  if (formData[i].type === "select") {
+
+    let defaultOption = document.createElement("option");
+    defaultOption.textContent = "Select a Language...";
+
+    select.appendChild(defaultOption);
+
+    for (let j = 0; j < formData[i].options.length; j++) {
+      let options = document.createElement("option");
+      options.setAttribute('label', formData[i].options[j].label);
+      options.setAttribute('value', formData[i].options[j].value);
+
+      select.appendChild(options);
+    }
+    fieldsContent.appendChild(select);
+  }
 }
