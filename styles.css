@@ -25,10 +25,7 @@
   padding: 25px;
 }
 
-.wrapper .fields input,
-.wrapper .fields textarea,
-.wrapper .fields select
- {
+.wrapper .fields input, .wrapper .fields textarea, .wrapper .fields select {
   padding-left: 15px;
   width: 500px;
   height: 35px;
