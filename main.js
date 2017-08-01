@@ -103,6 +103,22 @@ for (let i = 0; i < formData.length; i++) {
   let input = document.createElement("input");
   let select = document.createElement("select");
   let textArea = document.createElement("textarea");
+  let div = document.createElement("div");
+  let span = document.createElement("span");
+  let icon = document.createElement("i");
+
+
+
+  for (let k = 0; k < formData.length; k++) {
+    var halfIcon = formData[i].icon
+    icon.setAttribute("class", "fa " + halfIcon);
+    div.setAttribute("class", "input-group");
+    span.setAttribute("class", "input-group-addon");
+
+    span.appendChild(icon);
+    div.appendChild(span);
+
+  }
 
   for (let property in formData[i]) {
     if (formData[i].type === "text" || formData[i].type === "tel" || formData[i].type === "email") {
@@ -110,14 +126,20 @@ for (let i = 0; i < formData.length; i++) {
 
       input.placeholder = formData[i].label;
       input.setAttribute(property, value);
-      fieldsContent.appendChild(input);
+      input.setAttribute("class", "form-control");
+      div.appendChild(input);
+      fieldsContent.appendChild(div);
+
+
     }
     else if (formData[i].type === "textarea") {
       let value = formData[i][property];
 
       textArea.placeholder = formData[i].label;
       textArea.setAttribute(property, value);
-      fieldsContent.appendChild(textArea);
+
+      div.appendChild(textArea);
+      fieldsContent.appendChild(div);
     }
   }
   if (formData[i].type === "select") {
@@ -134,6 +156,7 @@ for (let i = 0; i < formData.length; i++) {
 
       select.appendChild(options);
     }
-    fieldsContent.appendChild(select);
+    div.appendChild(select);
+    fieldsContent.appendChild(div);
   }
 }
